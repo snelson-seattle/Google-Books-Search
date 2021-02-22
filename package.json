@@ -1,18 +1,24 @@
 {
-  "name": "Google-Books-Search",
+  "name": "google-books-search",
   "version": "1.0.0",
-  "description": "",
+  "description": "Google Book Search with React",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "seed": "node scripts/seedDB.js",
+    "adminSeed": "node scripts/adminSeed.js",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/snelson-seattle/Google-Books-Search.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Scott Nelson",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/snelson-seattle/Google-Books-Search/issues"
@@ -23,6 +29,9 @@
     "nodemon": "^2.0.7"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.17",
+    "morgan": "^1.10.0"
   }
 }
