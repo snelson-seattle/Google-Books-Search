@@ -16,5 +16,10 @@ export default {
     },
     saveBook: (bookData) => {
         return axios.post("api/books/", bookData);
+    },
+    getGoogleBook: async (bookTitle) => {
+        let response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&maxResults=40`);
+        let bookData = await response.json();
+        return bookData;   
     }
 };

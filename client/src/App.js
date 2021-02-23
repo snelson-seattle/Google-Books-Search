@@ -1,5 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Navbar from "./Components/Navbar";
 import './App.css';
 
 // Import Components
@@ -12,6 +13,8 @@ import Saved from "./Pages/Saved";
 function App() {
   return (
     <Router>
+      <Navbar />
+      <br />
       <Header />
       <main>
         <Switch>

@@ -5,6 +5,10 @@ const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 
+// Import Routes
+const apiRoutes = require("./routes/apiRoutes");
+
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -19,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // API ROUTES GO HERE
-
+app.use("/api", apiRoutes);
 
 // Send non-api routes to the REACT app
 app.get("*", (req, res) => {
