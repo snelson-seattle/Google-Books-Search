@@ -1,4 +1,5 @@
 import React, { useState }from "react";
+import BookCard from "../../Components/BookCard";
 import API from "../../utils/API";
 
 function Search() {
@@ -6,15 +7,15 @@ function Search() {
     const [bookList, setBookList] = useState([]);
 
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        API.getGoogleBook(bookTitle).then(results => {
-            setBookList(results.items); 
-            console.log(results.items);
+        API.getGoogleBook(bookTitle).then(results => {  
+            console.log(results.items);          
+            setBookList(results.items);            
         });
     };
-
-
+    
     return (
         <React.Fragment>
             <section className="container">
@@ -30,33 +31,23 @@ function Search() {
             </section>
             <br />
             <section className="container">
-                {bookList.map(book => {
-                    return (
-                        <div className="card mb-3" key={book.id}>
-                            <div className="row g-0">
-                                <div className="col-md-5">
-                                    <h2 className="card-title">{book.volumeInfo.title}</h2>
-                                    <h4>{book.volumeInfo.subtitle}</h4>
-                                    <p>Written by: </p>
-                                </div>
-                                <div className="col-md-7">
-                                    <button className="btn btn-primary float-end">Save</button>
-                                    <button className="btn btn-secondary float-end">View</button>
-                                </div>
-                            </div>
-                            <div className="row g-0">
-                                <div className="col-md-4">
-                                    <img src={book.volumeInfo.imageLinks.thumbnail} alt="Book Cover Image" />
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="card-body">
-                                        <p className="card-text">{book.volumeInfo.description}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })}
+                <ul className="list-group">               
+                    {bookList.map(book => {
+                        return (
+                            <li key={book.id} className="list-group-item">
+                                <BookCard 
+                                    id={book.id}
+                                    title={book.volumeInfo.title}
+                                    subtitle={book.volumeInfo.subtitle}
+                                    authors={book.volumeInfo.authors}
+                                    link={book.volumeInfo.canonicalVolumeLink}
+                                    thumbnail={book.volumeInfo.imageLinks.thumbnail}
+                                    description={book.volumeInfo.description}
+                                />  
+                            </li>
+                        )
+                    })}
+                </ul>
             </section>
         </React.Fragment>
     )

@@ -1,9 +1,14 @@
 import React from "react";
+import SavedBookList from "../../Components/SavedBookList";
 
-function Saved() {
-    return (
-        <section>
-            <h1>This is the saved page.</h1>
+
+function Saved() {  
+
+    return (        
+        <section className="container">
+            <h1 className="text-center">Saved Books</h1>
+            <hr />      
+            <SavedBookList />
         </section>
     )
 }
