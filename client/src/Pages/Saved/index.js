@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import BookContext from "../../Contexts/BookContext";
 import SavedBookList from "../../Components/SavedBookList";
 
-
-function Saved() {  
+function Saved() {     
+    const context = useContext(BookContext);
 
     return (        
         <section className="container">
             <h1 className="text-center">Saved Books</h1>
             <hr />      
-            <SavedBookList />
+            <SavedBookList 
+                books={context.books}
+            />
         </section>
     )
 }

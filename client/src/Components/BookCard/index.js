@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import BookContext from "../../Contexts/BookContext";
 import API from "../../utils/API";
 
 function BookCard(props) {
+    const context = useContext(BookContext);
+
     const handleSave = (event) => {
         event.preventDefault();
         const bookData = {
@@ -14,7 +17,7 @@ function BookCard(props) {
         }
 
         API.saveBook(bookData).then(res => {
-            console.log(res);
+            context.getBooks();
         });
     } 
 

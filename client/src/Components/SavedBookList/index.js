@@ -1,18 +1,13 @@
-import React, {useState, useEffect } from "react";
+import React, { useContext } from "react";
+import BookContext from "../../Contexts/BookContext";
 import API from "../../utils/API";
 
-function SavedBookList(props) {
-    const [books, setBooks] = useState([]);
-
-    useEffect(() => {
-        API.getBooks().then(results => {           
-            setBooks(results.data);
-        });
-    }, [])   
+function SavedBookList(props) {   
+    const context = useContext(BookContext); 
 
     return (
         <ul className="list-group">
-                {books.map(book => {
+                {props.books.map(book => {
                     return (
                         <li className="list-group-item" key={book._id}>
                             <div className="card mb-3">
@@ -26,10 +21,8 @@ function SavedBookList(props) {
                                         <button className="btn btn-danger float-end"
                                             onClick={event => {
                                                 event.preventDefault();
-                                                API.deleteBook(book._id).then(results => {
-                                                    API.getBooks().then(res => {
-                                                        setBooks(res.data);
-                                                    });
+                                                API.deleteBook(book._id).then(res => {
+                                                    context.getBooks();
                                                 });
                                             }}
                                         >

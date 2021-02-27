@@ -10,8 +10,8 @@ function Search() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        API.getGoogleBook(bookTitle).then(results => {  
-            console.log(results.items);          
+        API.getGoogleBook(bookTitle).then(results => {   
+            console.log(results.items);                  
             setBookList(results.items);            
         });
     };
